@@ -1,0 +1,193 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdlib.h>
+
+	class pi{
+			int n,k,isv,*p[200],*t,*s,*q,*r,*y,*sum,*chk;
+		public:
+			pi(int j);
+			void creat(int x);
+			void sq_r(int x);
+			void show();
+			void multi(int m);
+			void multisum(int m);
+			void assign();
+			void assignsum();
+			void add();
+			int check();
+			void getins();
+			void getinq();
+			~pi(){cout<<"Deleting pi";}
+		};
+
+	 pi::pi(int j){
+			k=j;
+			isv=0;
+			for(j=1;j<=k;j++) {										if(!p)cout<<"Allocation error\n";						p[j]=(int*) malloc(k * sizeof(int));}
+
+				t=new int [2*k+1];
+				q=new int [k];
+				s=new int [k];
+				r=new int [k+1];
+				y=new int [k];
+			sum=new int [k]; for(j=1;j<=k;j++)sum[j]=0;
+			chk=new int [k]; for(j=1;j<=k;j++)chk[j]=0;
+			if(!q)cout<<"Allocation error\n";
+			if(!r)cout<<"Allocation error\n";
+			if(!s)cout<<"Allocation error\n";
+			if(!t)cout<<"Allocation error\n";
+			if(!y)cout<<"Allocation error\n";
+			if(!sum)cout<<"Allocation error\n";
+			if(!chk)cout<<"Allocation error\n";
+					  }
+
+
+void  pi::creat(int x)
+	 {  n=x;
+		int is,l,j;
+		is=10;
+		l=1;
+		hundred:
+		if(n<=is)
+		{	y[l]=is/n;
+			is=is%n;
+			is=is*10;
+			if(is==0){l=l+1;
+				for(j=l;j<=k;j++)
+				y[j]=0;}
+			else
+				{l=l+1;
+				if(l<=k) goto hundred;
+				}			}
+		else
+			{y[l]=0;
+			l=l+1;
+			is=is*10;
+			if(l<=k) goto hundred;
+			}		}
+	   void pi::sq_r(int x)
+		  {      n=x;
+		 int i,j,kk,ii,a;
+		   creat(n);
+		   getinq();
+			int l=k;
+		   for(i=1;i<=l+1;i++)
+		   {for(j=1;j<=l;j++){p[i][j]=0;}}
+		   for(j=l;j>=1;j--)
+		   {kk=0;
+		  for(i=l;i>=1;i--)	  {
+		  p[i][j]=q[i]*s[j]+kk;
+		  if(p[i][j]<=9)
+		  kk=0;
+		  else
+		  {kk=p[i][j]/10;
+		  p[i][j]=p[i][j]-10*kk;}
+		  if(i==1)
+		  {for(ii=l;ii>=1;ii--)
+		  p[ii+1][j]=p[ii][j];
+		  p[1][j]=kk;}
+		   } }
+  /* ADDING THE SUCCESSIVE NUMBERS WHICH COMES AFTER USUL MULTIPLICATION
+  WE STORE THIS RESULT IN AN ARRAY T*/
+	j=2*l;
+	for(i=1;i<=j;i++)
+	t[i]=0;
+	for(j=l;j>=1;j--)
+	{for(i=l+1;i>=1;i--)	{
+	 t[i+j-1]=t[i+j-1]+p[i][j];
+	 if(t[i+j-1]>9)
+	   {t[i+j-1]=t[i+j-1]-10;
+	   t[i+j-2]=t[i+j-2]+1;
+		if(t[i+j-2]>9)
+		  {if((i+j-2)==l)
+		  {t[i+j-2]=t[i+j-2]-10;
+		  t[i+j-3]=t[i-j+l-3]+1;
+		goto s78;		}		  }		  }
+	  s78:	}}  //close for
+	  for(i=1;i<=l+1;i++)
+		r[i]=t[i];
+		if(r[l+1]<5) goto retn;
+		 for(i=l+1;i>=2;i--)
+		 {r[i-1]=r[i-1]+1;
+		 if(r[i-1]<10) goto retn;
+		 r[i-1]=0;}
+		   retn:
+		 }//end of sq_r
+		void pi::show(){
+		int a;
+		isv=k-10;
+		cout<<"\n\n\t\t      WELCOME TO THE VALUE OF 'PI'\n\tTHERE ARE "
+			<<isv<<" CORRECT DIGITS AFTER THE DECIMAL POINT";
+					   cout<<"\n\n\t3.";
+			  if(isv<=51){
+					for(a=1;a<=isv;a++)cout<<sum[a];
+						  }
+			  else  {
+					for(a=1;a<=isv;a++){
+						if(a%51==0) cout<<"\n\t";
+						cout<<sum[a];}
+					 }		}
+		void pi::getins(){
+			int i;
+			for( i=1;i<=k;i++)
+				s[i]=y[i];			  }
+		void pi::getinq(){
+			int i;
+			for( i=1;i<=k;i++)
+				q[i]=y[i];
+			  }
+
+		void pi::multi(int m){
+		  int m2,k2=0;
+		 for(m2 = k;m2>= 1;m2--){
+		  r[m2] = r[m2] * m + k2  ;
+			 if (r[m2] <= 9){
+				  k2 = 0 ;
+				 goto x250; }
+			 else  {
+				 k2 = r[m2] / 10;
+				  r[m2] = r[m2] - k2 * 10 ;  }
+					x250:  }
+				 }
+		   void pi::multisum(int m){
+		  int m2,k2=0;
+		 for(m2 = k;m2>= 1;m2--){
+		  sum[m2] = sum[m2] * m + k2  ;
+			 if (sum[m2] <= 9){
+				  k2 = 0 ;
+				 goto x250; }
+			 else  {
+				 k2 = sum[m2] / 10;
+				  sum[m2] = sum[m2] - k2 * 10 ;  }
+					x250:  } }
+		   void pi:: assign(){
+				for(int j = 1;j<=k;j++)
+					s[j] = r[j];}
+				 void pi:: assignsum(){
+				for(int j = 1;j<=k;j++){
+					sum[j] = r[j];
+					chk[j] = r[j];}}
+		void pi::add(){
+		  int m;
+			for (m = k;m>=1;m--){
+				sum[m] = sum[m] + r[m];
+				if (sum[m] < 10) goto g555;
+				sum[m] = sum[m] - 10;
+				if(m==1) goto g555;
+				sum[m - 1] = sum[m - 1] + 1;
+			g555:           }}
+		  int pi::check(){
+		   int i,iv;
+		 if (isv== 0)
+			iv = 1;
+		 else {
+			iv = isv;
+			isv = isv - 1;	 }
+		for( i = iv;i<= k;i++){
+			if (chk[i] == sum[i])
+						isv = isv + 1;
+			 else
+						goto a92;  }
+			a92: for (i = isv + 1;i<=k;i++)
+					chk[i] = sum[i];
+					return isv; }
